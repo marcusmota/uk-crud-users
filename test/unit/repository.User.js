@@ -35,9 +35,8 @@ describe('repository/User unit test', () => {
 
     require("./../../config/db");
 
-    beforeEach(() => {
-        userModel.deleteMany({}, () => {
-        })
+    beforeEach( async () => {
+        await userModel.deleteMany({});
     });
 
     describe('Test the repository user methods', async() => {
@@ -117,7 +116,7 @@ describe('repository/User unit test', () => {
 
         });
 
-        describe('putUser method', () => {
+        describe('putUserGivenId method', () => {
 
             it('it should return the updated user object', async () => {
 
@@ -139,6 +138,8 @@ describe('repository/User unit test', () => {
                 const updated = await userRepository.putUserGivenId(userStore._id, newData);
 
                 chai.expect(updated.email).to.eq(newData.email);
+                chai.expect(updated.familyName).to.eq(newData.familyName);
+                chai.expect(updated.givenName).to.eq(newData.givenName);
 
             });
 
