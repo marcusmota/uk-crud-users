@@ -212,7 +212,32 @@ describe('repositories/User unit test', () => {
             })
 
         });
+        
+        describe('deleteUserById method', () => {
 
+            it("it should delete a given user by ID", async () => {
+                
+                const data = {
+                    givenName : faker.name.firstName(),
+                    familyName : faker.name.lastName(),
+                    email : faker.internet.email(),
+                    created : faker.date.past()
+                }
+        
+                const user = await new userModel(data).save();
+
+                const deleted = await userRepository.deleteUserById(user._id);
+
+                const checkDeleted = await userRepository.getById(deleted._id);
+
+                chai.expect(deleted.email).to.eq(data.email);
+                chai.expect(deleted.familyName).to.eq(data.familyName);
+                chai.expect(deleted.givenName).to.eq(data.givenName);
+                chai.expect(checkDeleted).to.eq(null);
+
+            })
+
+        })
         
     });
 
