@@ -1,7 +1,11 @@
 const userModel = require("./../models/User")
 
-const getAll = (req) => {
-    return userModel.find({});
+const getAll = (where = {}, limit = 20, skip = 0) => {
+    return userModel.find(where).skip(skip).limit(limit);
+};
+
+const deleteUserById = (id) => {
+    return userModel.findOneAndDelete({_id : id});
 };
 
 const getById = (id) => {
@@ -9,10 +13,14 @@ const getById = (id) => {
 };
 
 const storeUser = (user) => {
+    delete user._id;
+    delete user.created;
     return new userModel(user).save();
 };
 
 const putUserGivenId = async(id, user) => {
+    delete user._id;
+    delete user.created;
     return await userModel.findOneAndUpdate({ _id : id}, user, { new : true});
 };
 
@@ -24,15 +32,23 @@ const checkIfEmailBelongsToUser = async(_id, email) => {
     return await userModel.countDocuments({ _id, email }) > 0 ? true : false;
 };
 
+const couldStoreEmailOnCreate = async(email) => {
+
+    let flag = await checkIfEmailExists(email);
+
+    return !flag;
+};
+
 const couldStoreEmailOnUpdate = async(_id, email) => {
 
     let flag = await checkIfEmailExists(email);
 
     if(flag){
-        flag = await checkIfEmailBelongsToUser(_id, email);
+        return await checkIfEmailBelongsToUser(_id, email);
     }
 
-    return flag;
+    return !flag;
+
 };
 
 
@@ -43,5 +59,7 @@ module.exports = {
     storeUser,
     putUserGivenId,
     checkIfEmailExists,
-    couldStoreEmailOnUpdate
+    couldStoreEmailOnCreate,
+    couldStoreEmailOnUpdate,
+    deleteUserById
 }
