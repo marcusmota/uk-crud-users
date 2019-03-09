@@ -3,22 +3,20 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-const { DB_USER, DB_PASSWORD } = process.env;
+const { DB_CONNECT_URL } = process.env;
 const env = process.env.NODE_ENV;
 const debug = env === 'DEV' ? true : false;
 let db = null;
 
 if(env === "DEV"){
-    db = "crud_users_dev";
+    db = "crud_users_dev?retryWrites=true";
 }else if(env === "TEST"){
-    db = "crud_users_test";
+    db = "crud_users_test?retryWrites=true";
 }else {
-    db = "crud_users";
+    db = "crud_users?retryWrites=true";
 }
 
-const connectString = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@uk-recruitment-j6l34.mongodb.net/${db}?retryWrites=true`;
-
-console.log(connectString);
+const connectString = `${DB_CONNECT_URL}/${db}`;
 
 mongoose.Promise = global.Promise;
 
