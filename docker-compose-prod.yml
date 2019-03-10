@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile-prod
+    command: pm2-runtime start app.js
+    tty: true
+    environment:
+      NODE_ENV: PROD
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/app
