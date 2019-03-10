@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const dbJson = require('./db.json');
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || "DEV";
 const debug = env === 'DEV' ? true : false;
 
 const connectString = dbJson[env].DB_URL;

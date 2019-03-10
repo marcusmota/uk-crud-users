@@ -8,11 +8,10 @@ const PORT = 3000;
 
 require('dotenv').config();
 
-const userRoutes = require("./routes/User");
-
-const env = process.env.NODE_ENV;
-const APP_NAME = process.env.APP_NAME;
 const dbJson = require('./config/db.json');
+const userRoutes = require("./routes/User");
+const env = process.env.NODE_ENV || "DEV";
+const APP_NAME = process.env.APP_NAME || "UK-RECRUITMENT-API";
 const dbUrl = dbJson[env].DB_URL;
 
 app.use(validator())
