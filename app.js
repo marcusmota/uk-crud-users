@@ -24,6 +24,8 @@ require('./config/db');
 
 userRoutes(app);
 
+app.use("/", (req, res) => res.status(404).send("Endpoints not found, please, read the documentation to see the available endpoints"))
+
 if(!module.parent) {
   app.listen(PORT, () => {
     console.log(`\n
