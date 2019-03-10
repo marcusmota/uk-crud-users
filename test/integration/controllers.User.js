@@ -274,7 +274,7 @@ describe('controllers/User Integration Test', () => {
                 created : faker.date.past()
             }
 
-            user = await new userModel(data).save();
+            const user = await new userModel(data).save();
 
             const result = await request
             .delete(`/v1/user/${user._id}`)

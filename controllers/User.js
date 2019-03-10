@@ -79,7 +79,7 @@ const postUser = async(req, res) => {
     
     try {
         
-        errors = await req.asyncValidationErrors();
+        await req.asyncValidationErrors();
 
         const user = await userRepository.storeUser(req.body);
         return res.send(user);
@@ -110,7 +110,7 @@ const putUserById = async(req, res) => {
     
     try {
         
-        errors = await req.asyncValidationErrors();
+        await req.asyncValidationErrors();
 
         const user = await userRepository.putUserGivenId(id, req.body);
         

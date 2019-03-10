@@ -8,29 +8,6 @@ const faker = require('faker');
 mongoose.models = {};
 mongoose.modelSchemas = {};
 
-const insertNUsers = async(n) => {
-    
-    let p = [];
-
-    for(let i=0;i<n;i++){
-
-        const data = {
-            givenName : faker.name.firstName(),
-            familyName : faker.name.lastName(),
-            email : faker.internet.email(),
-            created : faker.date.past()
-        }
-
-        p.push(new userModel(data).save())
-    }
-
-    await Promise.all(p)
-
-    return;
-
-};
-
-
 describe('repositories/User Integration test', () => {
 
     require("./../../config/db");
