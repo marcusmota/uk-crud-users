@@ -5,13 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
     command: node_modules/.bin/nodemon --exec npm start
+    tty: true
     environment:
-      NODE_ENV: development
+      NODE_ENV: DEV
     ports:
       - '3000:3000'
     env_file:
       - .env
     volumes:
       - .:/usr/app
-    environment:
-      - NODE_ENV=DEV

@@ -6,7 +6,14 @@ const validator = require('express-validator');
 const app = express();
 const PORT = 3000;
 
+require('dotenv').config();
+
 const userRoutes = require("./routes/User");
+
+const env = process.env.NODE_ENV;
+const APP_NAME = process.env.APP_NAME;
+const dbJson = require('./config/db.json');
+const dbUrl = dbJson[env].DB_URL;
 
 app.use(validator())
 app.use(bodyParser.json());
@@ -19,7 +26,13 @@ userRoutes(app);
 
 if(!module.parent) {
   app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`)
+    console.log(`\n
+            APP: ${APP_NAME}
+            Port: ${PORT}
+            env: ${env}
+            DB: ${dbUrl}
+            Date: ${new Date()}
+           \n`)
   })
 }
 

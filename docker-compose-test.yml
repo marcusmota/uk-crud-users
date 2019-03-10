@@ -4,7 +4,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    command: node_modules/.bin/mocha test/unit/**.js -w
+    command: npm run test-with-env
+    tty: true
     environment:
       NODE_ENV: TEST
     ports:
@@ -13,3 +14,7 @@ services:
       - .env
     volumes:
       - .:/usr/app
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
