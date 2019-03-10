@@ -10,4 +10,12 @@ const schema = new Schema({
   updated: {type: Date, default: Date.now },
 }, { timestamps: { createdAt: 'created', updatedAt : 'updated' } });
 
+schema.virtual('id').get(function(){
+  return this._id.toHexString();
+});
+
+schema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = mongoose.model('users', schema);
