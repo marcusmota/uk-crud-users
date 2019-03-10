@@ -27,7 +27,7 @@ describe('repositories/User Integration test', () => {
                     const data = {
                         givenName : faker.name.firstName(),
                         familyName : faker.name.lastName(),
-                        email : faker.internet.email(),
+                        email : faker.internet.email().toLowerCase(),
                         created : faker.date.past()
                     }
             
@@ -44,7 +44,7 @@ describe('repositories/User Integration test', () => {
                     const data = {
                         givenName : faker.name.firstName(),
                         familyName : faker.name.lastName(),
-                        email : faker.internet.email(),
+                        email : faker.internet.email().toLowerCase(),
                         created : faker.date.past()
                     }
             
@@ -53,7 +53,7 @@ describe('repositories/User Integration test', () => {
                     const data2 = {
                         givenName : faker.name.firstName(),
                         familyName : faker.name.lastName(),
-                        email : faker.internet.email(),
+                        email : faker.internet.email().toLowerCase(),
                         created : faker.date.past()
                     }
             
@@ -81,7 +81,7 @@ describe('repositories/User Integration test', () => {
                     const data = {
                         givenName : faker.name.firstName(),
                         familyName : faker.name.lastName(),
-                        email : faker.internet.email(),
+                        email : faker.internet.email().toLowerCase(),
                         created : faker.date.past()
                     }
             

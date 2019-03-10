@@ -75,7 +75,7 @@ const postUser = async(req, res) => {
         .isEmail().withMessage("you must insert a valid email address")
         .custom(async val => {
             return val && await userRepository.couldStoreEmailOnCreate(val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken").normalizeEmail();
+        }).withMessage("the email address is already taken").trim();
     
     try {
         
@@ -106,7 +106,7 @@ const putUserById = async(req, res) => {
         .isEmail().withMessage("you must insert a valid email address")
         .custom(async val => {
             return val && await userRepository.couldStoreEmailOnUpdate(id, val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken").normalizeEmail();
+        }).withMessage("the email address is already taken").trim();
     
     try {
         

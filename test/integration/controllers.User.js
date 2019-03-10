@@ -14,7 +14,7 @@ const insertNUsers = async(n) => {
         const data = {
             givenName : faker.name.firstName(),
             familyName : faker.name.lastName(),
-            email : faker.internet.email(),
+            email : faker.internet.email().toLowerCase(),
             created : faker.date.past()
         }
 
@@ -76,7 +76,7 @@ describe('controllers/User Integration Test', () => {
             const data = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
 
@@ -97,7 +97,7 @@ describe('controllers/User Integration Test', () => {
             const data = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 _id : "5c83c214d729d246f23bf041"
             }
 
@@ -120,7 +120,7 @@ describe('controllers/User Integration Test', () => {
             const data = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
 
@@ -165,13 +165,13 @@ describe('controllers/User Integration Test', () => {
             const data = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
             const data2 = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
             user = await new userModel(data).save();
@@ -183,7 +183,7 @@ describe('controllers/User Integration Test', () => {
             const dataNew = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
 
@@ -204,7 +204,7 @@ describe('controllers/User Integration Test', () => {
             const dataNew = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past(),
                 _id : user2._id
             }
@@ -270,7 +270,7 @@ describe('controllers/User Integration Test', () => {
             const data = {
                 givenName : faker.name.firstName(),
                 familyName : faker.name.lastName(),
-                email : faker.internet.email(),
+                email : faker.internet.email().toLowerCase(),
                 created : faker.date.past()
             }
 
