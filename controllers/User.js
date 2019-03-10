@@ -67,15 +67,15 @@ const parseArrayToObject = (arr = []) => {
 const postUser = async(req, res) => {
     
     req.assert('givenName')
-        .isLength({min: 1, max: 100}).withMessage("the given name field is required")
+        .isLength({min: 1, max: 100}).withMessage("the given name field is required").trim().escape()
     req.assert('familyName')
-        .isLength({min: 1, max: 100}).withMessage("the family name field is required")
+        .isLength({min: 1, max: 100}).withMessage("the family name field is required").trim().escape(),
     req.assert('email')
         .isLength({min: 1, max: 100}).withMessage("the email field is required")
         .isEmail().withMessage("you must insert a valid email address")
         .custom(async val => {
             return val && await userRepository.couldStoreEmailOnCreate(val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken")
+        }).withMessage("the email address is already taken").normalizeEmail();
     
     try {
         
@@ -98,15 +98,15 @@ const putUserById = async(req, res) => {
     const { id } = req.params;
 
     req.assert('givenName')
-        .isLength({min: 1, max: 100}).withMessage("the given name field is required")
+        .isLength({min: 1, max: 100}).withMessage("the given name field is required").trim().escape()
     req.assert('familyName')
-        .isLength({min: 1, max: 100}).withMessage("the family name field is required")
+        .isLength({min: 1, max: 100}).withMessage("the family name field is required").trim().escape()
     req.assert('email')
         .isLength({min: 1, max: 100}).withMessage("the email field is required")
         .isEmail().withMessage("you must insert a valid email address")
         .custom(async val => {
             return val && await userRepository.couldStoreEmailOnUpdate(id, val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken")
+        }).withMessage("the email address is already taken").normalizeEmail();
     
     try {
         
