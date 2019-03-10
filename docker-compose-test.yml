@@ -4,10 +4,10 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    command: node_modules/.bin/nodemon --exec npm start
+    command: npm run test-with-env
     tty: true
     environment:
-      NODE_ENV: DEV
+      NODE_ENV: TEST
     ports:
       - '3000:3000'
     env_file:

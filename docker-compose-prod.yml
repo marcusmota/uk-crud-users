@@ -3,11 +3,11 @@ services:
   app:
     build: 
       context: .
-      dockerfile: Dockerfile
-    command: node_modules/.bin/nodemon --exec npm start
+      dockerfile: Dockerfile-prod
+    command: pm2-runtime start app.js
     tty: true
     environment:
-      NODE_ENV: DEV
+      NODE_ENV: PROD
     ports:
       - '3000:3000'
     env_file:

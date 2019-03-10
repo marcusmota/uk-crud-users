@@ -1,0 +1,11 @@
+{
+    "DEV" : {
+        "DB_URL" : "mongodb://mongodb/crud_users_dev"
+    },
+    "PROD" : {
+        "DB_URL" : "mongodb://mongodb/crud_users"
+    },
+    "TEST" : {
+        "DB_URL" : "mongodb://mongodb/crud_users_test"
+    }
+}
