@@ -19,7 +19,7 @@ The application is built with Node.js and MongoDB as database with docker. To st
 
 The application will be avaible on *PORT 3000* by default.
 
-
+Note: create .env file with the enviroment variables, our docker-compose file already has the NODE_ENV variable, on .env file you have to just create a *APP_NAME=crud_users* variable or just copy .env_copy to .env
 
 ### Running the application in development mode
 
