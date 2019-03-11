@@ -7,7 +7,9 @@ This is an implementation of this code challenge [github.com/holidayextras/cultu
 
 ## Documentation
 
-The documentation is available in [SwaggerHub / uk-Recruiment-api](https://app.swaggerhub.com/apis-docs/marcusmota/uk-recruiment-api/1.0.0)
+The documentation is available in [SwaggerHub / uk-Recruiment-api](https://app.swaggerhub.com/apis-docs/marcusmota/uk-recruiment-api/1.0.0) 
+
+The server is running on [139.59.139.191:3000](http://139.59.139.191:3000)
 
 
 
