@@ -36,7 +36,7 @@ docker-compose -f docker-compose.yml up --build
 To run the tests using docker, use this command:
 
 ```shell
-docker-compose -f docker-compose.test.yml up --build
+docker-compose -f docker-compose-test.yml up --build
 ```
 
 
