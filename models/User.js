@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const uuidv4 = require('uuid/v4');
 
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
+  _id : {type: String, default: uuidv4},
   email:  {type: String},
   givenName:  {type: String},
   familyName:  {type: String},
@@ -11,7 +13,7 @@ const schema = new Schema({
 }, { timestamps: { createdAt: 'created', updatedAt : 'updated' } });
 
 schema.virtual('id').get(function(){
-  return this._id.toHexString();
+  return this._id;
 });
 
 schema.set('toJSON', {
