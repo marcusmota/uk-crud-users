@@ -25,11 +25,11 @@ const putUserGivenId = async(id, user) => {
 };
 
 const checkIfEmailExists = async(email) => {
-    return (await userModel.countDocuments({ email })) > 0 ? true : false;
+    return (await userModel.countDocuments({ email })) > 0;
 };
 
 const checkIfEmailBelongsToUser = async(_id, email) => {
-    return await userModel.countDocuments({ _id, email }) > 0 ? true : false;
+    return await userModel.countDocuments({ _id, email }) > 0;
 };
 
 const couldStoreEmailOnCreate = async(email) => {

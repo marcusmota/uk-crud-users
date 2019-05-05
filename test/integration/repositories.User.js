@@ -2,7 +2,6 @@
 const userRepository = require("./../../repositories/User");
 const userModel = require("./../../models/User");
 const mongoose = require("mongoose");
-const chai = require("chai");
 const faker = require('faker');
 
 mongoose.models = {};
@@ -16,7 +15,7 @@ describe('repositories/User Integration test', () => {
         await userModel.deleteMany({});
     });
 
-    describe('Test the repository user methods', async() => {
+    describe('Test the repository user methods', () => {
 
         describe('Custom Validators Methods', () => {
 
@@ -35,7 +34,7 @@ describe('repositories/User Integration test', () => {
 
                     const flag = await userRepository.couldStoreEmailOnUpdate(user._id, data.email);
 
-                    chai.expect(flag).to.eq(true);
+                    expect(flag).toBe(true);
 
                 });
 
@@ -61,7 +60,7 @@ describe('repositories/User Integration test', () => {
 
                     const flag = await userRepository.couldStoreEmailOnUpdate(user2._id, user.email);
 
-                    chai.expect(flag).to.eq(false);
+                    expect(flag).toBe(false);
 
                 });
 
@@ -69,7 +68,7 @@ describe('repositories/User Integration test', () => {
 
                     const flag = await userRepository.couldStoreEmailOnUpdate("5c81911bc86073004ed52f30", "newemail@email.com");
 
-                    chai.expect(flag).to.eq(true);
+                    expect(flag).toBe(true);
 
                 });
             })
@@ -89,7 +88,7 @@ describe('repositories/User Integration test', () => {
 
                     const flag = await userRepository.couldStoreEmailOnCreate(data.email);
 
-                    chai.expect(flag).to.eq(false);
+                    expect(flag).toBe(false);
 
                 });
 
@@ -97,7 +96,7 @@ describe('repositories/User Integration test', () => {
 
                     const flag = await userRepository.couldStoreEmailOnCreate("newemail@email.com");
 
-                    chai.expect(flag).to.eq(true);
+                    expect(flag).toBe(true);
 
                 });
             })

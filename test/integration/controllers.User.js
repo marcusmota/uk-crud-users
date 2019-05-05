@@ -1,9 +1,9 @@
 
 let faker = require('faker');
 faker.locale = "pt_BR";
-const chai = require('chai');
 const userModel = require("./../../models/User");
-
+const request = require("supertest");
+const app = require("../../app");
 
 const insertNUsers = async(n) => {
     
@@ -21,9 +21,7 @@ const insertNUsers = async(n) => {
         p.push(new userModel(data).save())
     }
 
-    await Promise.all(p)
-
-    return;
+    return await Promise.all(p)
 
 };
 
@@ -33,7 +31,7 @@ describe('controllers/User Integration Test', () => {
         await userModel.deleteMany({});
     });
 
-    describe('GET /v1/users', async() => {
+    describe('GET /v1/users', () => {
 
         const size = 10;
 
@@ -41,13 +39,12 @@ describe('controllers/User Integration Test', () => {
 
             await insertNUsers(size);
 
-            const result = await request
+            const result = await request(app)
             .get(`/v1/users`)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body).to.be.an('array')
-            chai.expect(result.body).to.have.length(size);
+            expect(result.status).toBe(200);
+            expect(result.body).toHaveLength(size);
 
         });
 
@@ -57,13 +54,12 @@ describe('controllers/User Integration Test', () => {
 
             await insertNUsers(size);
 
-            const result = await request
+            const result = await request(app)
             .get(`/v1/users?skip=${skip}`)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body).to.be.an('array')
-            chai.expect(result.body).to.have.length(size-skip);
+            expect(result.status).toBe(200);
+            expect(result.body).toHaveLength(size-skip);
 
         });
 
@@ -80,15 +76,15 @@ describe('controllers/User Integration Test', () => {
                 created : faker.date.past()
             }
 
-            const result = await request
+            const result = await request(app)
             .post(`/v1/user`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body.givenName).to.eql(data.givenName);
-            chai.expect(result.body.familyName).to.eql(data.familyName);
-            chai.expect(result.body.email).to.eql(data.email);
+            expect(result.status).toBe(200);
+            expect(result.body.givenName).toBe(data.givenName);
+            expect(result.body.familyName).toBe(data.familyName);
+            expect(result.body.email).toBe(data.email);
 
         });
 
@@ -101,16 +97,16 @@ describe('controllers/User Integration Test', () => {
                 _id : "5c83c214d729d246f23bf041"
             }
 
-            const result = await request
+            const result = await request(app)
             .post(`/v1/user`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body._id).to.not.eql(data._id);
-            chai.expect(result.body.givenName).to.eql(data.givenName);
-            chai.expect(result.body.familyName).to.eql(data.familyName);
-            chai.expect(result.body.email).to.eql(data.email);
+            expect(result.status).toBe(200);
+            expect(result.body._id).not.toBe(data._id);
+            expect(result.body.givenName).toBe(data.givenName);
+            expect(result.body.familyName).toBe(data.familyName);
+            expect(result.body.email).toBe(data.email);
 
 
         });
@@ -126,15 +122,15 @@ describe('controllers/User Integration Test', () => {
 
             await new userModel(data).save();
 
-            const result = await request
+            const result = await request(app)
             .post(`/v1/user`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(422);
-            chai.expect(result.body).to.have.property("email");
-            chai.expect(result.body).to.not.have.property("givenName");
-            chai.expect(result.body).to.not.have.property("familyName");
+            expect(result.status).toBe(422);
+            expect(result.body).toHaveProperty("email");
+            expect(result.body).not.toHaveProperty("givenName");
+            expect(result.body).not.toHaveProperty("familyName");
 
         });
 
@@ -143,15 +139,15 @@ describe('controllers/User Integration Test', () => {
             const data = {
             }
 
-            const result = await request
+            const result = await request(app)
             .post(`/v1/user`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(422);
-            chai.expect(result.body).to.have.property("email");
-            chai.expect(result.body).to.have.property("givenName");
-            chai.expect(result.body).to.have.property("familyName");
+            expect(result.status).toBe(422);
+            expect(result.body).toHaveProperty("email");
+            expect(result.body).toHaveProperty("givenName");
+            expect(result.body).toHaveProperty("familyName");
 
         });
 
@@ -187,15 +183,15 @@ describe('controllers/User Integration Test', () => {
                 created : faker.date.past()
             }
 
-            const result = await request
+            const result = await request(app)
             .put(`/v1/user/${user._id}`)
             .send(dataNew)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body.givenName).to.eql(dataNew.givenName);
-            chai.expect(result.body.familyName).to.eql(dataNew.familyName);
-            chai.expect(result.body.email).to.eql(dataNew.email);
+            expect(result.status).toBe(200);
+            expect(result.body.givenName).toBe(dataNew.givenName);
+            expect(result.body.familyName).toBe(dataNew.familyName);
+            expect(result.body.email).toBe(dataNew.email);
 
         });
 
@@ -209,16 +205,16 @@ describe('controllers/User Integration Test', () => {
                 _id : user2._id
             }
 
-            const result = await request
+            const result = await request(app)
             .put(`/v1/user/${user._id}`)
             .send(dataNew)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body._id).to.not.eql(dataNew._id);
-            chai.expect(result.body.givenName).to.eql(dataNew.givenName);
-            chai.expect(result.body.familyName).to.eql(dataNew.familyName);
-            chai.expect(result.body.email).to.eql(dataNew.email);
+            expect(result.status).toBe(200);
+            expect(result.body._id).not.toBe(dataNew._id);
+            expect(result.body.givenName).toBe(dataNew.givenName);
+            expect(result.body.familyName).toBe(dataNew.familyName);
+            expect(result.body.email).toBe(dataNew.email);
 
         });
 
@@ -231,16 +227,32 @@ describe('controllers/User Integration Test', () => {
                 created : faker.date.past()
             }
 
-            const result = await request
+            const result = await request(app)
             .put(`/v1/user/${user._id}`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(422);
-            chai.expect(result.body).to.have.property("email");
-            chai.expect(result.body.email).to.eql("the email address is already taken")
-            chai.expect(result.body).to.not.have.property("givenName");
-            chai.expect(result.body).to.not.have.property("familyName");
+            expect(result.status).toBe(422);
+            expect(result.body).toHaveProperty("email");
+            expect(result.body.email).toBe("the email address is already taken")
+            expect(result.body).not.toHaveProperty("givenName");
+            expect(result.body).not.toHaveProperty("familyName");
+
+        });
+
+        it('should return 200 when update a given user with his email', async() => {
+
+
+            const result = await request(app)
+            .put(`/v1/user/${user._id}`)
+            .send(user)
+            .set('Accept', /application\/json/)
+
+            expect(result.status).toBe(200);
+            expect(result.body._id).toBe(user._id);
+            expect(result.body.givenName).toBe(user.givenName);
+            expect(result.body.familyName).toBe(user.familyName);
+            expect(result.body.email).toBe(user.email);
 
         });
 
@@ -249,17 +261,18 @@ describe('controllers/User Integration Test', () => {
             const data = {
             }
 
-            const result = await request
+            const result = await request(app)
             .put(`/v1/user/${user._id}`)
             .send(data)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(422);
-            chai.expect(result.body).to.have.property("email");
-            chai.expect(result.body).to.have.property("givenName");
-            chai.expect(result.body).to.have.property("familyName");
+            expect(result.status).toBe(422);
+            expect(result.body).toHaveProperty("email");
+            expect(result.body).toHaveProperty("givenName");
+            expect(result.body).toHaveProperty("familyName");
 
         });
+        
 
     });
 
@@ -276,15 +289,15 @@ describe('controllers/User Integration Test', () => {
 
             const user = await new userModel(data).save();
 
-            const result = await request
+            const result = await request(app)
             .delete(`/v1/user/${user._id}`)
             .set('Accept', /application\/json/)
 
-            chai.expect(result.status).to.eql(200);
-            chai.expect(result.body._id).to.not.eql(data._id);
-            chai.expect(result.body.givenName).to.eql(data.givenName);
-            chai.expect(result.body.familyName).to.eql(data.familyName);
-            chai.expect(result.body.email).to.eql(data.email);
+            expect(result.status).toBe(200);
+            expect(result.body._id).not.toBe(data._id);
+            expect(result.body.givenName).toBe(data.givenName);
+            expect(result.body.familyName).toBe(data.familyName);
+            expect(result.body.email).toBe(data.email);
 
 
         });
