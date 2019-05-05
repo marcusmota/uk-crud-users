@@ -72,14 +72,15 @@ const postUser = async(req, res) => {
         .isLength({min: 1, max: 100}).withMessage("the family name field is required").trim().escape(),
     req.assert('email')
         .isLength({min: 1, max: 100}).withMessage("the email field is required")
-        .isEmail().withMessage("you must insert a valid email address")
-        .custom(async val => {
-            return val && await userRepository.couldStoreEmailOnCreate(val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken").trim();
+        .isEmail().withMessage("you must insert a valid email address");
     
     try {
         
         await req.asyncValidationErrors();
+
+        if(await userRepository.couldStoreEmailOnCreate(req.body.email) === false){
+            return res.status(422).send(parseArrayToObject([{param: "email", msg: "the email address is already taken"}]));
+        }
 
         const user = await userRepository.storeUser(req.body);
         return res.send(user);
@@ -104,14 +105,15 @@ const putUserById = async(req, res) => {
     req.assert('email')
         .isLength({min: 1, max: 100}).withMessage("the email field is required")
         .isEmail().withMessage("you must insert a valid email address")
-        .custom(async val => {
-            return val && await userRepository.couldStoreEmailOnUpdate(id, val) ? Promise.resolve() : Promise.reject();
-        }).withMessage("the email address is already taken").trim();
     
     try {
         
         await req.asyncValidationErrors();
 
+        if(await userRepository.couldStoreEmailOnUpdate(id, req.body.email) === false){
+            return res.status(422).send(parseArrayToObject([{param: "email", msg: "the email address is already taken"}]));
+        }
+        
         const user = await userRepository.putUserGivenId(id, req.body);
         
         return res.send(user);
