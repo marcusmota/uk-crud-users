@@ -244,6 +244,22 @@ describe('controllers/User Integration Test', () => {
 
         });
 
+        it('should return 200 when update a given user with his email', async() => {
+
+
+            const result = await request
+            .put(`/v1/user/${user._id}`)
+            .send(user)
+            .set('Accept', /application\/json/)
+
+            chai.expect(result.status).to.eql(200);
+            chai.expect(result.body._id).to.eql(user._id);
+            chai.expect(result.body.givenName).to.eql(user.givenName);
+            chai.expect(result.body.familyName).to.eql(user.familyName);
+            chai.expect(result.body.email).to.eql(user.email);
+
+        });
+
         it('should return 422 with error object that contains givenName, familyName and email property', async() => {
 
             const data = {
@@ -260,6 +276,7 @@ describe('controllers/User Integration Test', () => {
             chai.expect(result.body).to.have.property("familyName");
 
         });
+        
 
     });
 
