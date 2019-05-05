@@ -2,7 +2,6 @@ const { mockRequest, mockResponse } = require('mock-req-res')
 const userController = require("./../../controllers/User");
 const userModel = require("./../../models/User");
 const mongoose = require("mongoose");
-const chai = require("chai");
 const faker = require('faker');
 
 
@@ -45,14 +44,14 @@ describe('controllers/User unit test', () => {
         await userModel.deleteMany({});
     });
 
-    describe('Test the user controller methods', async() => {
+    describe('Test the user controller methods', () => {
 
         describe('getAll method', () => {
 
             it('it should return an empty array', async () => {
 
                 let users = await userController.getAll(req, res)
-                chai.expect(users).to.have.lengthOf(0);
+                expect(users).toHaveLength(0);
 
             });
 
@@ -63,7 +62,7 @@ describe('controllers/User unit test', () => {
                 await insertNUsers(size);
 
                 let users = await userController.getAll(req, res)
-                chai.expect(users).to.have.lengthOf(size);
+                expect(users).toHaveLength(size);
 
             });
 
@@ -90,9 +89,9 @@ describe('controllers/User unit test', () => {
 
                 const user = await userController.getById(req, res);
 
-                chai.expect(user.givenName).to.eq(data.givenName);
-                chai.expect(user.familyName).to.eq(data.familyName);
-                chai.expect(user.email).to.eq(data.email);
+                expect(user.givenName).toBe(data.givenName);
+                expect(user.familyName).toBe(data.familyName);
+                expect(user.email).toBe(data.email);
 
             });
 
@@ -106,7 +105,7 @@ describe('controllers/User unit test', () => {
 
                 const user = await userController.getById(req, res);
 
-                chai.expect(user).to.eq(null);
+                expect(user).toBe(null);
 
             });
 

@@ -2,7 +2,6 @@
 const userRepository = require("./../../repositories/User");
 const userModel = require("./../../models/User");
 const mongoose = require("mongoose");
-const chai = require("chai");
 const faker = require('faker');
 
 mongoose.models = {};
@@ -39,14 +38,14 @@ describe('repositories/User unit test', () => {
         await userModel.deleteMany({});
     });
 
-    describe('Test the repository user methods', async() => {
+    describe('Test the repository user methods', () => {
 
         describe('getAll method', () => {
 
             it('it should return an empty array', async () => {
 
                 let users = await userRepository.getAll()
-                chai.expect(users).to.have.lengthOf(0);
+                expect(users).toHaveLength(0);
 
             });
 
@@ -57,7 +56,7 @@ describe('repositories/User unit test', () => {
                 await insertNUsers(size);
 
                 let users = await userRepository.getAll()
-                chai.expect(users).to.have.lengthOf(size);
+                expect(users).toHaveLength(size);
 
             });
 
@@ -78,9 +77,9 @@ describe('repositories/User unit test', () => {
                 
                 const user = await userRepository.getById(userStore._id);
 
-                chai.expect(user.givenName).to.eq(data.givenName);
-                chai.expect(user.familyName).to.eq(data.familyName);
-                chai.expect(user.email).to.eq(data.email);
+                expect(user.givenName).toBe(data.givenName);
+                expect(user.familyName).toBe(data.familyName);
+                expect(user.email).toBe(data.email);
 
             });
 
@@ -88,7 +87,7 @@ describe('repositories/User unit test', () => {
 
                 const user = await userRepository.getById("5c815a3d085b098d82b8d1e5");
 
-                chai.expect(user).to.eq(null);
+                expect(user).toBe(null);
 
             });
 
@@ -107,9 +106,9 @@ describe('repositories/User unit test', () => {
         
                 const user = await userRepository.storeUser(data);
 
-                chai.expect(user.givenName).to.eq(data.givenName);
-                chai.expect(user.familyName).to.eq(data.familyName);
-                chai.expect(user.email).to.eq(data.email);
+                expect(user.givenName).toBe(data.givenName);
+                expect(user.familyName).toBe(data.familyName);
+                expect(user.email).toBe(data.email);
 
             });
 
@@ -136,9 +135,9 @@ describe('repositories/User unit test', () => {
 
                 const updated = await userRepository.putUserGivenId(userStore._id, newData);
 
-                chai.expect(updated.email).to.eq(newData.email);
-                chai.expect(updated.familyName).to.eq(newData.familyName);
-                chai.expect(updated.givenName).to.eq(newData.givenName);
+                expect(updated.email).toBe(newData.email);
+                expect(updated.familyName).toBe(newData.familyName);
+                expect(updated.givenName).toBe(newData.givenName);
 
             });
 
@@ -161,7 +160,7 @@ describe('repositories/User unit test', () => {
 
                     const flag = await userRepository.checkIfEmailExists(data.email);
 
-                    chai.expect(flag).to.eq(true);
+                    expect(flag).toBe(true);
 
                 });
 
@@ -169,7 +168,7 @@ describe('repositories/User unit test', () => {
 
                     const flag = await userRepository.checkIfEmailExists("newemail@email.com");
 
-                    chai.expect(flag).to.eq(false);
+                    expect(flag).toBe(false);
 
                 });
             })
@@ -189,7 +188,7 @@ describe('repositories/User unit test', () => {
 
                     const flag = await userRepository.checkIfEmailBelongsToUser(user._id, data.email);
 
-                    chai.expect(flag).to.eq(true);
+                    expect(flag).toBe(true);
 
                 });
 
@@ -206,7 +205,7 @@ describe('repositories/User unit test', () => {
 
                     const flag = await userRepository.checkIfEmailBelongsToUser(user._id, "newemail@email.com");
 
-                    chai.expect(flag).to.eq(false);
+                    expect(flag).toBe(false);
 
                 });
             })
@@ -230,10 +229,10 @@ describe('repositories/User unit test', () => {
 
                 const checkDeleted = await userRepository.getById(deleted._id);
 
-                chai.expect(deleted.email).to.eq(data.email);
-                chai.expect(deleted.familyName).to.eq(data.familyName);
-                chai.expect(deleted.givenName).to.eq(data.givenName);
-                chai.expect(checkDeleted).to.eq(null);
+                expect(deleted.email).toBe(data.email);
+                expect(deleted.familyName).toBe(data.familyName);
+                expect(deleted.givenName).toBe(data.givenName);
+                expect(checkDeleted).toBe(null);
 
             })
 

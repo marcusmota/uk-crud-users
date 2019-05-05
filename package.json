@@ -10,6 +10,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
+    "jest": "^24.8.0",
     "mock-req-res": "^1.0.4",
     "mongoose": "^5.4.17",
     "pm2": "^3.3.1",
@@ -25,7 +26,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "test-with-env": "NODE_ENV=TEST mocha --opts test/integration/mocha.opts test/**/*.js -w"
+    "test-with-env": "NODE_ENV=TEST jest --detectOpenHandles --watch"
   },
   "repository": {
     "type": "git",
