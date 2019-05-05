@@ -25,8 +25,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "test-with-env": "NODE_ENV=TEST jest --detectOpenHandles --watch"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

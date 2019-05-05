@@ -4,7 +4,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    command: npm run test-with-env
+    command: node_modules/.bin/jest --detectOpenHandles --watchAll
     tty: true
     environment:
       NODE_ENV: TEST
