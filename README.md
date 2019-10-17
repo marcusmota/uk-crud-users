@@ -1,8 +1,7 @@
 
 ## UK-Recruiment-API 
 
-This is an implementation of this code challenge [github.com/holidayextras/culture/blob/master/recruitment/developer-API-task](https://github.com/holidayextras/culture/blob/master/recruitment/developer-API-task.md)
-
+This is an implementation of this code challenge [https://github.com/marcusmota/uk-crud-users/Task.md](https://github.com/marcusmota/uk-crud-users/Task.md)
 
 
 ## Documentation
