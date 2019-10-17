@@ -1,7 +1,7 @@
 
 ## UK-Recruiment-API 
 
-This is an implementation of this code challenge [https://github.com/marcusmota/uk-crud-users/Task.md](https://github.com/marcusmota/uk-crud-users/Task.md)
+This is an implementation of this code challenge [https://github.com/marcusmota/uk-crud-users/Task.md](https://github.com/marcusmota/uk-crud-users/blob/master/Task.md)
 
 
 ## Documentation
