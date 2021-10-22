@@ -1,20 +1,16 @@
-
 const mongoose = require('mongoose');
-const dbJson = require('./db.json');
+const config = require('.');
 
-const env = process.env.NODE_ENV || "DEV";
-const debug = env === 'DEV' ? true : false;
+const env = process.env.NODE_ENV || 'development';
 
-const connectString = dbJson[env].DB_URL;
+const connectString = config[env].DB_URL;
 
 mongoose.Promise = global.Promise;
 
 mongoose.connect(connectString, { useNewUrlParser: true });
 
-mongoose.set('debug', debug);
-
-process.on('SIGINT', function() {
-  mongoose.connection.close(function () {
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
     process.exit(0);
   });
 });
