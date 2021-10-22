@@ -1,13 +1,13 @@
 version: '3'
 services:
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     command: node_modules/.bin/jest --detectOpenHandles --watchAll
     tty: true
     environment:
-      NODE_ENV: TEST
+      NODE_ENV: test
     ports:
       - '3000:3000'
     env_file:
