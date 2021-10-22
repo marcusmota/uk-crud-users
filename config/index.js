@@ -1,4 +1,4 @@
-moduke.exports = {
+module.exports = {
   development: {
     DB_URL: 'mongodb://mongodb/crud_users_dev',
     APP_ENV: 'development',

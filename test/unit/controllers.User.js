@@ -2,7 +2,7 @@ const { mockRequest, mockResponse } = require('mock-req-res');
 const mongoose = require('mongoose');
 const faker = require('faker');
 const userController = require('../../controllers/user');
-const userModel = require('../../models/User');
+const userModel = require('../../models/user');
 
 mongoose.models = {};
 mongoose.modelSchemas = {};

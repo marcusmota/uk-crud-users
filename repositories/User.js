@@ -1,4 +1,4 @@
-const userModel = require('../models/User');
+const userModel = require('../models/user');
 
 const getAll = (where = {}, limit = 20, skip = 0) => userModel.find(where).skip(skip).limit(limit);
 

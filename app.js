@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const validator = require('express-validator');
-const userRoutes = require('./routes/User');
+const userRoutes = require('./routes/user');
 
 const app = express();
 const PORT = 3000;
@@ -11,6 +11,7 @@ require('dotenv').config();
 
 app.use(validator());
 app.use(cors());
+app.use(express.json());
 
 require('./config/db');
 

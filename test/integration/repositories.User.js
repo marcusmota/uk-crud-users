@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const faker = require('faker');
 const userRepository = require('../../repositories/user');
-const userModel = require('../../models/User');
+const userModel = require('../../models/user');
 
 mongoose.models = {};
 mongoose.modelSchemas = {};

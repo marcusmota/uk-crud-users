@@ -1,4 +1,4 @@
-const userRepository = require('../repositories/User');
+const userRepository = require('../repositories/user');
 
 const getAll = async (req, res) => {
   const {
@@ -80,6 +80,7 @@ const postUser = async (req, res) => {
     const user = await userRepository.storeUser(req.body);
     return res.send(user);
   } catch (errors) {
+    console.log(errors)
     return res.status(422).send(parseArrayToObject(errors));
   }
 };

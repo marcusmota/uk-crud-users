@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const config = require('.');
 
 const env = process.env.NODE_ENV || 'development';
-
 const connectString = config[env].DB_URL;
 
 mongoose.Promise = global.Promise;
