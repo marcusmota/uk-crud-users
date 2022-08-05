@@ -12,7 +12,7 @@
     "express-validator": "^5.3.1",
     "jest": "^24.8.0",
     "mock-req-res": "^1.0.4",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "pm2": "^3.3.1",
     "sinon": "^7.2.7"
   },
