@@ -13,7 +13,7 @@
     "jest": "^24.8.0",
     "mock-req-res": "^1.0.4",
     "mongoose": "^5.4.17",
-    "pm2": "^3.3.1",
+    "pm2": "^5.2.0",
     "sinon": "^7.2.7"
   },
   "devDependencies": {
